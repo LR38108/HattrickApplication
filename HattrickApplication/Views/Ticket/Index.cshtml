@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HattrickApplication.Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfSubmission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsWinning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalOdd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PWon)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfSubmission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsWinning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalOdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PWon)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,69 @@
+﻿@model HattrickApplication.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSubmission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSubmission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsWinning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsWinning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalOdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PWon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PWon)
+        </dd>
+        @foreach(var tItem in Model.TicketItems)
+        {
+            <p>@Html.DisplayFor(modelItem => tItem.EventID)</p>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
