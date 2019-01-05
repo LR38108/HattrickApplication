@@ -91,10 +91,10 @@ namespace HattrickApplication.DAL
             new TicketItem{TicketID=7, UserID=1, EventID=3, TipType=Tip.TX, TipOdd=1.32m},
             new TicketItem{TicketID=7, UserID=1, EventID=4, TipType=Tip.TX2, TipOdd=1.9m},
             new TicketItem{TicketID=8, UserID=1, EventID=2, TipType=Tip.TX2, TipOdd=1.9m},
-            new TicketItem{TicketID=1, UserID=1, EventID=2, TipType=Tip.TX, TipOdd=1.32m},
-            new TicketItem{TicketID=1, UserID=1, EventID=3, TipType=Tip.T2, TipOdd=2.3m},
-            new TicketItem{TicketID=1, UserID=1, EventID=4, TipType=Tip.T12, TipOdd=1.12m},
-            new TicketItem{TicketID=1, UserID=1, EventID=5, TipType=Tip.T1X, TipOdd=1.1m},
+            new TicketItem{TicketID=8, UserID=1, EventID=2, TipType=Tip.TX, TipOdd=1.32m},
+            new TicketItem{TicketID=8, UserID=1, EventID=3, TipType=Tip.T2, TipOdd=2.3m},
+            new TicketItem{TicketID=9, UserID=1, EventID=4, TipType=Tip.T12, TipOdd=1.12m},
+            new TicketItem{TicketID=9, UserID=1, EventID=5, TipType=Tip.T1X, TipOdd=1.1m},
             new TicketItem{TicketID=9, UserID=1, EventID=6, TipType=Tip.T12, TipOdd=1.12m},
             };
             ticketItems.ForEach(t => context.TiceketItems.Add(t));

@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+@Scripts.Render("~/Scripts/scripts.js")
 <h2>Najnovije utakmice</h2>
 <style>
     footer {
@@ -58,45 +59,45 @@
             @foreach (var item in Model.Where(s => s.IsTopEvent))
             {
                 var name = "TipsCheckBoxGroupTop";
-            <tr id=@Html.DisplayFor(modelItem => item.ID)>
-                <td id="sportIDCell">
-                    @Html.DisplayFor(modelItem => item.SportID)
-                </td>
-                <td id="homeCell">
-                    @Html.DisplayFor(modelItem => item.Home)
-                </td>
-                <td id="awayCell">
-                    @Html.DisplayFor(modelItem => item.Away)
-                </td>
-                <td id="startCell">
-                    @Html.DisplayFor(modelItem => item.Start)
-                </td>
-                <td id="endCell">
-                    @Html.DisplayFor(modelItem => item.End)
-                </td>
-                <td id="tip1">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T1) name=@name id="1" />
-                </td>
-                <td id="tip2">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T2) name=@name id="2" />
-                </td>
-                <td id="tipX">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TX) name=@name id="X" />
-                </td>
-                <td id="tip1X">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T1X) name=@name id="1X" />
-                </td>
-                <td id="tipX2">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TX2) name=@name id="X2" />
-                </td>
-                <td id="tip12">
-                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T12) name=@name id="12" />
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
+                <tr id=@Html.DisplayFor(modelItem => item.ID)>
+                    <td id="sportIDCell">
+                        @Html.DisplayFor(modelItem => item.SportID)
+                    </td>
+                    <td id="homeCell">
+                        @Html.DisplayFor(modelItem => item.Home)
+                    </td>
+                    <td id="awayCell">
+                        @Html.DisplayFor(modelItem => item.Away)
+                    </td>
+                    <td id="startCell">
+                        @Html.DisplayFor(modelItem => item.Start)
+                    </td>
+                    <td id="endCell">
+                        @Html.DisplayFor(modelItem => item.End)
+                    </td>
+                    <td id="tip1">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T1) name=@name id="1" />
+                    </td>
+                    <td id="tip2">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T2) name=@name id="2" />
+                    </td>
+                    <td id="tipX">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TX) name=@name id="X" />
+                    </td>
+                    <td id="tip1X">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T1X) name=@name id="1X" />
+                    </td>
+                    <td id="tipX2">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TX2) name=@name id="X2" />
+                    </td>
+                    <td id="tip12">
+                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.T12) name=@name id="12" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
             }
         </table>
         <table class="table">
@@ -268,6 +269,7 @@
         <form id="ticket">
             <p>Bet:</p>
             <input type="text" id="bet" required />
+
             <p id="bet-minus-fee"></p>
             <table id="ticket-data" style="text-align:center; width:400px;">
                 <thead>
@@ -281,72 +283,7 @@
             </table>
             <p id="total-coeff"></p>
             <p id="winnings"></p>
-            <input type="submit" id="submit-ticket" value="Create Ticket"/>
+            <input type="submit" id="submit-ticket" value="Create Ticket" />
         </form>
     </section>
 </section>
-
-<script>
-    $('.tip').click(function () {
-        if ($(this).attr("class") == "tip") {
-            var group = "input:submit[name='" + $(this).attr("name") + "']";
-            var $row = jQuery(this).closest('tr');
-            var rowclass = $(this).attr("name");
-            var columnH = $row.find('#homeCell').html();
-            var columnA = $row.find('#awayCell').html();
-            var columnT = jQuery(this).attr("id");
-            var columnC = jQuery(this).attr("value");
-            var table = $('#ticket-data').children('tbody');
-            table.append('<tr id=' + rowclass + '><td>' + columnH + columnA + '</td ><td>' + columnT + '</td ><td class="coeff">' + columnC + '</td></tr > ');
-            $(group).attr("class", "tip");
-            $(this).attr("class", "tip-selected");
-            $(group).css("background", "");
-            $(this).css("background", "red");
-            $(group).attr("disabled", true);
-            $(this).attr("disabled", false);
-        } else {
-            var group = "input:submit[name='" + $(this).attr("name") + "']";
-            $(this).prop("class", "tip");
-            $(this).css("background", "");
-            var rowclass = $(this).attr("name");
-            var table = $('#ticket-data').children('tbody');
-            $('#' + rowclass).remove();
-            $(group).attr("disabled", false);
-        }
-    });
-
-    $('#bet').bind('keydown keyup keypress', function () {
-        if ($('#ticket-data >tbody >tr').length > 0) {
-            var mgmtfee = this.value * 0.95;
-            $('#bet-minus-fee').html('5 % management fee: ' + mgmtfee.toFixed(2));
-            var total = 1;
-            $('#ticket-data td.coeff').each(function () {
-                total *= $(this).text();
-
-            })
-            total = total.toFixed(2);
-            $('#total-coeff').html("Total coefficient: " + total);
-            $('#winnings').html("Potential Winnings: " + (mgmtfee * total).toFixed(2))
-        } else {
-            $('#total-coeff').html("");
-            $('#winnings').html("");
-        }
-    });
-
-    $('#submit-ticket').click(function () {
-        if ($('#ticket-data #TipsCheckBoxGroupTop').length > 0) {
-            var ctr = 0;
-            $('#ticket-data td.coeff').each(function () {
-                if ($(this).text() > 1.1) {
-                    ctr += 1;
-                }
-            })
-            if (ctr < 6) {
-                var needed = 6 - ctr;
-                alert("You must add at least " + needed + " other events with coefficient over 1.1");
-            } else {
-            }
-        }
-    })
-
-</script>

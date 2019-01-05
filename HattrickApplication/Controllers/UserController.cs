@@ -11,120 +11,107 @@ using HattrickApplication.Models;
 
 namespace HattrickApplication.Controllers
 {
-    public class TicketController : Controller
+    public class UserController : Controller
     {
         private HattrickApplicationContext db = new HattrickApplicationContext();
 
-        // GET: Ticket
+        // GET: User
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(c => c.TicketItems).ToList();
-            return View(tickets);
+            return View(db.Users.ToList());
         }
 
-        // GET: Ticket/Details/5
+        // GET: User/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return View(user);
         }
 
-        // GET: Ticket/Create
+        // GET: User/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Ticket/Create
+        // POST: User/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserId,DateOfSubmission,IsWinning,Bet,TotalOdd,PWon")] Ticket ticket)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Balance")] User user)
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.Find(ticket.UserId);
-                try
-                {
-                    if (user.Balance < ticket.Bet)
-                    {
-                        db.Tickets.Add(ticket);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch(ArgumentOutOfRangeException ex) 
-                {
-                    
-                }
-
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(ticket);
+            return View(user);
         }
 
-        // GET: Ticket/Edit/5
+        // GET: User/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return View(user);
         }
 
-        // POST: Ticket/Edit/5
+        // POST: User/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserId,DateOfSubmission,IsWinning,Bet,TotalOdd,PWon")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Balance")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ticket).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(ticket);
+            return View(user);
         }
 
-        // GET: Ticket/Delete/5
+        // GET: User/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return View(user);
         }
 
-        // POST: Ticket/Delete/5
+        // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ticket ticket = db.Tickets.Find(id);
-            db.Tickets.Remove(ticket);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

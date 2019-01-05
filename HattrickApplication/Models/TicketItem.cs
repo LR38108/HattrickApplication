@@ -18,9 +18,11 @@ namespace HattrickApplication.Models
     {
         public int ID { get; set; }
         public int TicketID { get; set; }
-        public int UserID { get; set; }
+        public int UserID { get; set; }    
         public int EventID { get; set; }
         public Tip TipType { get; set; }
         public decimal TipOdd { get; set; }
+
+        public virtual Event Event { get; set; }
     }
 }

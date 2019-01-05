@@ -8,6 +8,7 @@ namespace HattrickApplication.ViewModels
 {
     public class TicketTicketItems
     {
+        public IEnumerable<Event> Events { get; set; }
         public IEnumerable<Ticket> Tickets { get; set; }
         public IEnumerable<TicketItem> TicketItems { get; set; }
 

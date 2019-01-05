@@ -57,10 +57,23 @@
         <dd>
             @Html.DisplayFor(model => model.PWon)
         </dd>
-        @foreach(var tItem in Model.TicketItems)
-        {
-            <p>@Html.DisplayFor(modelItem => tItem.EventID)</p>
-        }
+        <table>
+            <thead><h3>Ticket Items</h3></thead>
+            <th>Event</th>
+            <th>Tip</th>
+            <th>Coefficient</th>
+            <tbody>
+                @foreach (var tItem in Model.TicketItems)
+                {
+                <tr>
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.Event.Home) - @Html.DisplayFor(modelItem => tItem.Event.Away)</td>                    
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.TipType)</td>
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.TipOdd)</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        
     </dl>
 </div>
 <p>
