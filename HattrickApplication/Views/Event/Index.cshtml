@@ -58,7 +58,7 @@
 
             @foreach (var item in Model.Where(s => s.IsTopEvent))
             {
-                var name = "TipsCheckBoxGroupTop";
+                var name = "TipsCheckBoxGroupTop"; 
                 <tr id=@Html.DisplayFor(modelItem => item.ID)>
                     <td id="sportIDCell">
                         @Html.DisplayFor(modelItem => item.SportID)
@@ -266,17 +266,18 @@
                 </tr>
             }
         </table>
-        <form id="ticket">
+        <section id="ticketform">
             <p>Bet:</p>
-            <input type="text" id="bet" required />
-
+            <input type="text" id="bet"/>
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             <p id="bet-minus-fee"></p>
             <table id="ticket-data" style="text-align:center; width:400px;">
                 <thead>
                     <tr>
-                        <th>SIFRA</th>
+                        <th>ID</th>
+                        <th>Event</th>
                         <th>Tip</th>
-                        <th>Koeficijent</th>
+                        <th>Coefficient</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -284,6 +285,6 @@
             <p id="total-coeff"></p>
             <p id="winnings"></p>
             <input type="submit" id="submit-ticket" value="Create Ticket" />
-        </form>
+        </section>
     </section>
 </section>

@@ -53,22 +53,21 @@ namespace HattrickApplication.Controllers
             if (ModelState.IsValid)
             {
                 User user = db.Users.Find(ticket.UserId);
-                try
-                {
-                    if (user.Balance < ticket.Bet)
-                    {
-                        db.Tickets.Add(ticket);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
+                if (user.Balance > ticket.Bet)
+                {                    
+                    db.Tickets.Add(ticket);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                catch(ArgumentOutOfRangeException ex) 
+                else
                 {
-                    
+                    TempData["error"] = "Insufficient funds!";
+                    return new RedirectResult(@"~\Event\");
                 }
 
-            }
 
+            }    
+                
             return View(ticket);
         }
 
@@ -117,7 +116,6 @@ namespace HattrickApplication.Controllers
             }
             return View(ticket);
         }
-
         // POST: Ticket/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

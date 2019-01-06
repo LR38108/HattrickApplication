@@ -18,8 +18,10 @@ namespace HattrickApplication.Controllers
         // GET: Event
         public ActionResult Index()
         {
+
             return View(db.Events.ToList());
         }
+
 
         // GET: Event/Details/5
         public ActionResult Details(int? id)
@@ -57,6 +59,35 @@ namespace HattrickApplication.Controllers
             }
 
             return View(@event);
+        }
+
+        [HttpPost]
+        public ActionResult CreateTicket(Ticket ticket)
+        {           
+
+            if (ModelState.IsValid)
+            {
+                User user = db.Users.Find(1);
+                if (user.Balance > ticket.Bet)
+                {
+                    user.Balance -= ticket.Bet;
+                    ticket.UserId = 1;
+                    ticket.DateOfSubmission = DateTime.Now;
+                    db.Tickets.Add(ticket);
+                    db.SaveChanges();
+                    //return RedirectToAction("Index");
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Insufficient funds!");
+                    return View();
+                }
+
+
+            }
+
+            return View();
         }
 
         // GET: Event/Edit/5
@@ -124,16 +155,5 @@ namespace HattrickApplication.Controllers
             }
             base.Dispose(disposing);
         }
-
-        //[HttpPost]
-        //public ActionResult CreateTicket(List<TicketItem> items)
-        //{
-        //    Ticket ticket = new Ticket();
-        //    ticket.UserId = 1; //User.Identity.GetUserId();
-        //    ticket.DateOfSubmission = DateTime.Now;
-        //    ticket.TicketItems = items;
-        //    ticket.IsWinning = false;
-
-        //}
     }
 }
