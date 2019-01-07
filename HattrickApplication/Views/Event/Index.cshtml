@@ -268,8 +268,8 @@
         </table>
         <section id="ticketform">
             <p>Bet:</p>
-            <input type="text" id="bet"/>
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <input type="text" id="bet" />
+            <p>@ViewBag.InsufficientFundsError</p>
             <p id="bet-minus-fee"></p>
             <table id="ticket-data" style="text-align:center; width:400px;">
                 <thead>

@@ -31,7 +31,7 @@
             $(table).find("#" + columnID).closest("tr").remove();
             $(group).attr("disabled", false);
         }
-    });
+	});
 
     $(document).bind('keydown keyup keypress click', function () {
         if ($('#ticket-data >tbody >tr').length > 0) {
@@ -85,12 +85,15 @@
 
 
             $.ajax(
-                {
-                    type: 'POST',
-                    data: JSON.stringify(ticket),
-                    url: 'Event/CreateTicket',
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8'
+				{
+					type: 'POST',
+					data: JSON.stringify(ticket),
+					url: 'Event/CreateTicket',
+					dataType: 'json',
+					contentType: 'application/json; charset=utf-8',
+					success: function () {
+						alert("Ticket created successfully!");
+					}
                 });
 
 

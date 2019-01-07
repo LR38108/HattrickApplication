@@ -16,10 +16,10 @@ namespace HattrickApplication.Controllers
         private HattrickApplicationContext db = new HattrickApplicationContext();
 
         // GET: Event
-        public ActionResult Index()
-        {
-
-            return View(db.Events.ToList());
+        public ActionResult Index()        {
+            
+            var model = db.Events.ToList();
+            return View(model);
         }
 
 
@@ -62,7 +62,7 @@ namespace HattrickApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTicket(Ticket ticket)
+        public JsonResult CreateTicket(Ticket ticket)
         {           
 
             if (ModelState.IsValid)
@@ -75,19 +75,19 @@ namespace HattrickApplication.Controllers
                     ticket.DateOfSubmission = DateTime.Now;
                     db.Tickets.Add(ticket);
                     db.SaveChanges();
-                    //return RedirectToAction("Index");
-                    return View();
+                    return Json("Index");
+                    //return View();
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Insufficient funds!");
-                    return View();
+                    
+                    return Json ("Error");
                 }
 
 
             }
 
-            return View();
+            return Json("");
         }
 
         // GET: Event/Edit/5
