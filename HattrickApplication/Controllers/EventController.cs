@@ -76,12 +76,12 @@ namespace HattrickApplication.Controllers
                     db.Tickets.Add(ticket);
                     db.SaveChanges();
                     //return RedirectToAction("Index");
-                    return View();
+                    return Json(new { success = true, message = "Ticket successfully created" });
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Insufficient funds!");
-                    return View();
+                    return Json(new { success = false, message = "Insufficient funds!" });
                 }
 
 

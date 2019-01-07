@@ -12,7 +12,7 @@
             var columnC = jQuery(this).attr("value");
             var table = $('#ticket-data').children('tbody');
             if ($("#ticket-data").find("#" + columnID).length) {
-                alert("Already played as Top event");
+                alert("Already played once!");
             } else {
                 table.append('<tr class="ticketitem" id=' + rowclass + '><td id="' + columnID +'"> ' + columnID + '</td > <td>' + columnH + columnA + '</td > <td>' + columnT + '</td > <td class="coeff">' + columnC + '</td></tr > ');
                 $(group).attr("class", "tip");
@@ -56,7 +56,7 @@
             if ($('#ticket-data #TipsCheckBoxGroupTop').length > 0) {
                 var ctr = 0;
                 $('#ticket-data td.coeff').each(function () {
-                    if ($(this).text() > 1.1) {
+                    if ($(this).text() >= 1.1) {
                         ctr += 1;
                     }
                 });
@@ -90,7 +90,18 @@
                     data: JSON.stringify(ticket),
                     url: 'Event/CreateTicket',
                     dataType: 'json',
-                    contentType: 'application/json; charset=utf-8'
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert(response.message);
+                    }
                 });
 
 
