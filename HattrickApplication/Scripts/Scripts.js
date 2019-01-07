@@ -31,7 +31,7 @@
             $(table).find("#" + columnID).closest("tr").remove();
             $(group).attr("disabled", false);
         }
-    });
+	});
 
     $(document).bind('keydown keyup keypress click', function () {
         if ($('#ticket-data >tbody >tr').length > 0) {
