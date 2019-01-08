@@ -19,6 +19,8 @@ namespace HattrickApplication.DAL
             new Event{SportID=1, Home="Hajduk", Away="Arsenal", Start=DateTime.Parse("2019-01-03 19:30:00"), End=DateTime.Parse("03.01.2019 17:30:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=false},
             new Event{SportID=1, Home="Dinamo", Away="Everton", Start=DateTime.Parse("2019-01-02 20:00:00"), End=DateTime.Parse("02.01.2019 22:00:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=false},
             new Event{SportID=2, Home="Cedevita", Away="Cibona", Start=DateTime.Parse("2019-01-05 12:10:00"), End=DateTime.Parse("05.01.2019 14:10:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=true},
+            new Event{SportID=2, Home="Cedevita", Away="Zadar", Start=DateTime.Parse("2019-01-05 12:10:00"), End=DateTime.Parse("05.01.2019 14:10:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=true},
+            new Event{SportID=2, Home="Zadar", Away="Cibona", Start=DateTime.Parse("2019-01-05 12:10:00"), End=DateTime.Parse("05.01.2019 14:10:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=true},
             new Event{SportID=3, Home="Mladost", Away="Jadran", Start=DateTime.Parse("2019-01-02 13:30:00"), End=DateTime.Parse("02.01.2019 15:30:00"), Result="", T1=1.15m , T2=2.3m, TX=1.09m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=false},
             new Event{SportID=2, Home="Cibona", Away="Cedevita", Start=DateTime.Parse("2019-01-08 13:30:00"), End=DateTime.Parse("08.01.2019 15:30:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=false},
             new Event{SportID=3, Home="Jadran", Away="Mladost", Start=DateTime.Parse("2019-01-07 13:30:00"), End=DateTime.Parse("07.01.2019 15:30:00"), Result="", T1=1.15m , T2=2.3m, TX=1.32m, T1X=1.10m, TX2=1.9m, T12=1.12m, IsTopEvent=false},
@@ -49,6 +51,7 @@ namespace HattrickApplication.DAL
             new Team{SportID= 1, Name="Arsenal"},
             new Team{SportID= 2, Name="Cibona"},
             new Team{SportID= 2, Name="Split"},
+            new Team{SportID= 2, Name="Zadar"},
             new Team{SportID= 3, Name="Jadran"},
             new Team{SportID= 3, Name="Mladost"},
             };
