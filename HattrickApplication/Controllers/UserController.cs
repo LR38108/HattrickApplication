@@ -74,6 +74,24 @@ namespace HattrickApplication.Controllers
             return View(user);
         }
 
+        public ActionResult CreditBalance(int? id, decimal balance)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            else {
+                user.Balance += balance;
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            return View(user);
+        }
+
         // POST: User/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

@@ -108,6 +108,31 @@
         } else {
             alert("Please input bet ammount");
         }
-    });
+	});
+
+	$("#credit-balance").click(function () {
+
+		var credit = $('#credit-ammount').val();
+
+		$.ajax(
+			{
+				type: 'POST',
+				data: { id: 1, balance: credit},
+				url: '~/User/CreditBalance',
+				dataType: 'json',
+				contentType: 'application/json; charset=utf-8',
+				success: function (response) {
+					if (response.success) {
+						alert("You credited your account " + credit);
+						location.reload();
+					} else {
+						alert(response.message);
+					}
+				},
+				error: function () {
+					alert(response.message);
+				}
+			});
+	});
     
 });
