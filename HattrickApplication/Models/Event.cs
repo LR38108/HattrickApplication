@@ -1,5 +1,4 @@
-﻿using HattrickApplication.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +7,7 @@ namespace HattrickApplication.Models
 {
 
 
-    public class Event : IEvent
+    public class Event
     {
         public int ID { get; set; }
         public int SportID { get; set; }

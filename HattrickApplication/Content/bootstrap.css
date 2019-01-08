@@ -4955,11 +4955,18 @@ a.badge:focus {
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
+
+.event-link{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
+  position:center;
   background-color: #eee;
 }
 .jumbotron h1,
