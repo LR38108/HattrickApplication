@@ -78,18 +78,18 @@ namespace HattrickApplication.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new { success = false, message = "Invalid user" });
             }
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                return Json(new { success = false, message = "User not found" });
             }
-            else {
+            else {                
                 user.Balance += balance;
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                db.SaveChanges();
+                return Json(new { success = true, message = "You successfully credited your account " + balance });
             }
-            return View(user);
         }
 
         // POST: User/Edit/5

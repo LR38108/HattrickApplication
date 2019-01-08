@@ -75,7 +75,6 @@ namespace HattrickApplication.Controllers
                     ticket.DateOfSubmission = DateTime.Now;
                     db.Tickets.Add(ticket);
                     db.SaveChanges();
-                    //return RedirectToAction("Index");
                     return Json(new { success = true, message = "Ticket successfully created" });
                 }
                 else

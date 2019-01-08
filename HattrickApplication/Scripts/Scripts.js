@@ -88,7 +88,7 @@
                 {
                     type: 'POST',
                     data: JSON.stringify(ticket),
-                    url: 'Event/CreateTicket',
+                    url: '/Event/CreateTicket',
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
@@ -112,27 +112,31 @@
 
 	$("#credit-balance").click(function () {
 
-		var credit = $('#credit-ammount').val();
+        var credit = $('#credit-ammount').val();
+        if (credit < 10 || credit > 10000) {
+            alert("Invalid amount");
+        } else {
 
-		$.ajax(
-			{
-				type: 'POST',
-				data: { id: 1, balance: credit},
-				url: '~/User/CreditBalance',
-				dataType: 'json',
-				contentType: 'application/json; charset=utf-8',
-				success: function (response) {
-					if (response.success) {
-						alert("You credited your account " + credit);
-						location.reload();
-					} else {
-						alert(response.message);
-					}
-				},
-				error: function () {
-					alert(response.message);
-				}
-			});
+            $.ajax(
+                {
+                    type: 'POST',
+                    data: JSON.stringify({ id: 1, balance: credit }),
+                    url: '/User/CreditBalance',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert(response.message);
+                    }
+                });
+        }
 	});
     
 });
