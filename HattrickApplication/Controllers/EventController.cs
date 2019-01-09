@@ -71,7 +71,7 @@ namespace HattrickApplication.Controllers
                 if (user.Balance > ticket.Bet)
                 {
                     user.Balance -= ticket.Bet;
-                    ticket.UserId = 1;
+                    ticket.User.ID = 1;
                     ticket.DateOfSubmission = DateTime.Now;
                     db.Tickets.Add(ticket);
                     db.SaveChanges();

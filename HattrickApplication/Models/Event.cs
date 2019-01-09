@@ -11,8 +11,8 @@ namespace HattrickApplication.Models
     {
         public int ID { get; set; }
         public int SportID { get; set; }
-        public string Home { get; set; }
-        public string Away { get; set; }
+        public virtual Team Home { get; set; }
+        public virtual Team Away { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Result { get; set; }

@@ -10,13 +10,13 @@ namespace HattrickApplication.DAL
         public HattrickApplicationContext() : base("HattrickApplicationContext")
         {
         }
-
-        public DbSet<Event> Events { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Sport> Sports { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Event> Events { get; set; }         
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketItem> TiceketItems { get; set; }
-        public DbSet<User> Users { get; set; }
+        
 
     }
 }

@@ -8,7 +8,7 @@ namespace HattrickApplication.Models
     public class Ticket
     {
         public int ID { get; set; }
-        public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime DateOfSubmission { get; set; }
         public bool IsWinning { get; set; }
         public decimal Bet { get; set; }

@@ -52,7 +52,7 @@ namespace HattrickApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.Find(ticket.UserId);
+                User user = db.Users.Find(ticket.User.ID);
                 if (user.Balance > ticket.Bet)
                 {                    
                     db.Tickets.Add(ticket);
