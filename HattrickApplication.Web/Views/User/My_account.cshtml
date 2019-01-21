@@ -1,0 +1,48 @@
+﻿@model HattrickApplication.Entities.User
+
+@{
+    ViewBag.Title = "My account";
+}
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+@Scripts.Render("~/Scripts/scripts.js")
+<h2>My account</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <button class="btn btn-info" onclick="location.href='@Url.Action("UserTickets", "Ticket", new{id=1})'">My tickets</button>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+    </dl>
+    <h4>Credit your balance</h4>
+    <p>(min:10 max:10000)</p>
+    <input id="credit-amount" type="text" min="10" max="10000" />
+    <button id="credit-balance" class="btn btn-success">Credit balance</button>
+</div>
+

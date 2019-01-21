@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HattrickApplication.Entities.Ticket>
+
+@{
+    ViewBag.Title = "UserTickets";
+}
+
+<h2>Your tickets</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Ticket ID
+        </th>
+        <th>
+            Date Of Submission
+        </th>
+        <th>
+            Is Winning
+        </th>
+        <th>
+            Bet
+        </th>
+        <th>
+            Total Odd
+        </th>
+        <th>
+            Potential Winnings
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSubmission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsWinning)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalOdd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PWon)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

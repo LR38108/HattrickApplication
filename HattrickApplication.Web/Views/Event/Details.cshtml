@@ -1,0 +1,122 @@
+﻿@model HattrickApplication.Entities.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SportId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Home)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Home)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Away)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Away)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip1X)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip1X)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipX2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipX2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsTopEvent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsTopEvent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

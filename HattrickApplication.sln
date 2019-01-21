@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HattrickApplication", "HattrickApplication\HattrickApplication.csproj", "{2923A301-B2BE-494D-9A14-20BB1175CC2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HattrickApplication.Web", "HattrickApplication.Web\HattrickApplication.Web.csproj", "{7A5D2AA1-B867-4EE8-97E0-EA2CFB0B0E3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HattrickApplication.Entities", "HattrickApplication.Entities\HattrickApplication.Entities.csproj", "{CE6AB639-8F60-4C1D-8A06-4C7B85BD63A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HattrickApplication.Dal", "HattrickApplication.Dal\HattrickApplication.Dal.csproj", "{42E209DE-239C-4612-8228-5246C4277061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2923A301-B2BE-494D-9A14-20BB1175CC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2923A301-B2BE-494D-9A14-20BB1175CC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2923A301-B2BE-494D-9A14-20BB1175CC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2923A301-B2BE-494D-9A14-20BB1175CC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5D2AA1-B867-4EE8-97E0-EA2CFB0B0E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5D2AA1-B867-4EE8-97E0-EA2CFB0B0E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5D2AA1-B867-4EE8-97E0-EA2CFB0B0E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5D2AA1-B867-4EE8-97E0-EA2CFB0B0E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE6AB639-8F60-4C1D-8A06-4C7B85BD63A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6AB639-8F60-4C1D-8A06-4C7B85BD63A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6AB639-8F60-4C1D-8A06-4C7B85BD63A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6AB639-8F60-4C1D-8A06-4C7B85BD63A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42E209DE-239C-4612-8228-5246C4277061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E209DE-239C-4612-8228-5246C4277061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E209DE-239C-4612-8228-5246C4277061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E209DE-239C-4612-8228-5246C4277061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

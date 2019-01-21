@@ -1,0 +1,82 @@
+﻿@model HattrickApplication.Entities.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSubmission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSubmission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsWinning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsWinning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalOdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PWon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PWon)
+        </dd>
+        <table>
+            <thead><h3>Ticket Items</h3></thead>
+            <th>Event</th>
+            <th>Tip</th>
+            <th>Coefficient</th>
+            <tbody>
+                @foreach (var tItem in Model.TicketItems)
+                {
+                <tr>
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.Event.Home.Name) - @Html.DisplayFor(modelItem => tItem.Event.Away.Name)</td>                    
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.TipType)</td>
+                    <td style="padding-right:15px;">@Html.DisplayFor(modelItem => tItem.TipOdd)</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
