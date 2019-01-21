@@ -9,6 +9,6 @@ namespace HattrickApplication.Dal.Repositories
 {
     public interface ISportRepository : IRepository<Sport>
     {
-
+        Sport UpdateSport(Sport sport);
     }
 }

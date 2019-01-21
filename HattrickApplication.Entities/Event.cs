@@ -22,6 +22,7 @@ namespace HattrickApplication.Entities
         public decimal Tip12 { get; set; }
         public bool IsTopEvent { get; set; }
 
+        public virtual Sport Sport { get; set; }
         public virtual Team Home { get; set; }
         public virtual Team Away { get; set; }
     }

@@ -1,161 +1,130 @@
-﻿using System;
+﻿using HattrickApplication.Dal;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using HattrickApplication.Dal;
 using HattrickApplication.Entities;
 
-namespace HattrickApplication.Controllers
+namespace HattrickApplication.Web.Controllers
 {
-    public class UserController : Controller
+    public class SportController : Controller
     {
         private IUnitOfWork unitOfWork;
 
-        public UserController()
+        public SportController()
         {
             this.unitOfWork = new UnitOfWork(new HattrickApplicationContext());
         }
 
-        public UserController(IUnitOfWork unitOfWork)
+        public SportController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: User
+        // GET: Sport
         public ActionResult Index()
         {
 
-            return View(unitOfWork.Users.GetAll());
+            return View(unitOfWork.Sports.GetAll());
         }
 
 
-        // GET: User/Details/5
+        // GET: Sport/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = unitOfWork.Users.Find(e => e.Id == id).FirstOrDefault();
-            if (user == null)
+            Sport sport = unitOfWork.Sports.Find(e => e.Id == id).FirstOrDefault();
+            if (sport == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(sport);
         }
 
-        public ActionResult My_account(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = unitOfWork.Users.Find(e => e.Id == id).FirstOrDefault();
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // GET: User/Create
+        // GET: Sport/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
+        // POST: Sport/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, Balance")] User user)
+        public ActionResult Create([Bind(Include = "Name")] Sport sport)
         {
 
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
             if (ModelState.IsValid)
             {
-                unitOfWork.Users.Add(user);
+                unitOfWork.Sports.Add(sport);
                 unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
-        }
-
-        public ActionResult CreditBalance(int id, decimal balance)
-        {
-            User user = unitOfWork.Users.GetById(id);
-            if (user == null)
-            {
-                return Json(new { success = false, message = "User not found" });
-            }
-            else
-            {
-                user.Balance += balance;
-                unitOfWork.Complete();
-                return Json(new { success = true, message = "You successfully credited your account " + balance });
-            }
+            return View(sport);
         }
 
 
-        // GET: User/Edit/5
+        // GET: Sport/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = unitOfWork.Users.Find(e => e.Id == id).FirstOrDefault();
-            if (user == null)
+            Sport sport = unitOfWork.Sports.Find(e => e.Id == id).FirstOrDefault();
+            if (sport == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(sport);
         }
 
-        // POST: User/Edit/5
+        // POST: Sport/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Balance")] User user)
+        public ActionResult Edit([Bind(Include = "Name")] Sport sport)
         {
             if (ModelState.IsValid)
             {
-                unitOfWork.Users.UpdateUser(user);
+                unitOfWork.Sports.UpdateSport(sport);
                 unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(sport);
         }
 
-        // GET: User/Delete/5
+        // GET: Sport/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = unitOfWork.Users.Find(e => e.Id == id).FirstOrDefault();
-            if (user == null)
+            Sport sport = unitOfWork.Sports.Find(e => e.Id == id).FirstOrDefault();
+            if (sport == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(sport);
         }
 
-        // POST: User/Delete/5
+        // POST: Sport/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = unitOfWork.Users.Find(e => e.Id == id).FirstOrDefault();
-            unitOfWork.Users.Remove(user);
+            Sport sport = unitOfWork.Sports.Find(e => e.Id == id).FirstOrDefault();
+            unitOfWork.Sports.Remove(sport);
             unitOfWork.Complete();
             return RedirectToAction("Index");
         }

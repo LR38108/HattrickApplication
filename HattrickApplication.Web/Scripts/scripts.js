@@ -185,7 +185,7 @@
     });
     $(".datePicker").datetimepicker({
             dateFormat: "dd/MM/yy",
-            timeFormat: 'hh:mm:ss'
+            timeFormat: 'HH:mm:ss'
         }
     );
 });

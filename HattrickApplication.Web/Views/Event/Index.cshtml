@@ -1,440 +1,105 @@
-﻿@using HattrickApplication.Entities
-@model IEnumerable<HattrickApplication.Entities.Event>
+﻿@model IEnumerable<HattrickApplication.Entities.Event>
 
 @{
     ViewBag.Title = "Index";
 }
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+<h2>Index</h2>
 
-<h2>Najnovije utakmice</h2>
-<input id="sesionDiv" type="hidden" value="@{
-                                               if (Session["Ticket"] != null)
-                                               {
-                                                   foreach (TicketItem t in(List<TicketItem>) Session["Ticket"])
-                                                   {
-                                                       if (t.Event.IsTopEvent)
-                                                       {
-                                                           <tr class='TipsCheckBoxGroupTop'><td id=@t.Event.Id>@t.Event.Id></td><td>@t.Event.Home.Name - @t.Event.Away.Name</td><td>@t.TipType</td><td>@t.TipOdd</td><td><button class='removeEvent' type='button'>X</button></td></tr>
-                                                       }
-                                                       else
-                                                       {
-                                                           <tr class='TipsCheckBoxGroup@(t.Event.Id)'><td id=@t.Event.Id>@t.Event.Id</td><td>@t.Event.Home.Name - @t.Event.Away.Name</td><td>@t.TipType</td><td>@t.TipOdd</td><td><button class='removeEvent' type='button'>X</button></td></tr>
-                                                       }
-                                                   }
-                                               }
-                                           }"/>
-<style>
-    footer {
-        display: none;
-    }
-
-    .tip {
-        border: none;
-        outline: none;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        font-size: 15px;
-    }
-
-        /* Style the active class, and buttons on mouse-over */
-        .tip-selected, .tip:hover {
-            background-color: #666;
-            color: white;
-        }
-</style>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<section id="main-section">
-    <section id="content">
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Top Events
-                        </button>
-                    </h5>
-                </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Away.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Home.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SportId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tip1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tip2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tip1X)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipX2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tip12)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsTopEvent)
+        </th>
+        <th></th>
+    </tr>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <p>Moguće je odabrati samo jedan Top Event</p>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.SportId)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Home)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Away)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Start)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.End)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Tip1)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Tip2)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.TipX)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Tip1X)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.TipX2)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Tip12)
-                                    </th>
-                                </tr>
-                            </thead>
-                            @foreach (var item in Model.Where(s => s.IsTopEvent))
-                            {
-                                var name = "TipsCheckBoxGroupTop";
-                                <tr scope="row" id=@Html.DisplayFor(modelItem => item.Id)>
-                                    <td id="sportIDCell">
-                                        @Html.DisplayFor(modelItem => item.SportId)
-                                    </td>
-                                    <td id="homeCell">
-                                        @Html.DisplayFor(modelItem => item.Home.Name)
-                                    </td>
-                                    <td id="awayCell">
-                                        @Html.DisplayFor(modelItem => item.Away.Name)
-                                    </td>
-                                    <td id="startCell">
-                                        @Html.DisplayFor(modelItem => item.Start)
-                                    </td>
-                                    <td id="endCell">
-                                        @Html.DisplayFor(modelItem => item.End)
-                                    </td>
-                                    <td id="tip1">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1) name=@name id="1" />
-                                    </td>
-                                    <td id="tip2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip2) name=@name id="2" />
-                                    </td>
-                                    <td id="tipX">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX) name=@name id="X" />
-                                    </td>
-                                    <td id="tip1X">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1X) name=@name id="1X" />
-                                    </td>
-                                    <td id="tipX2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX2) name=@name id="X2" />
-                                    </td>
-                                    <td id="tip12">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip12) name=@name id="12" />
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Nogomet
-                        </button>
-                    </h5>
-                </div>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Away.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Home.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SportId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip1X)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipX2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip12)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsTopEvent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SportId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Home)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Away)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.End)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1X)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip12)
-                                </th>
-                            </tr>
-
-                            @foreach (var item in Model.Where(s => s.SportId == 1 && s.IsTopEvent == false))
-                            {
-                                var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
-                                <tr scope="row" id=@Html.DisplayFor(modelItem => item.Id)>
-                                    <td id="sportIDCell">
-                                        @Html.DisplayFor(modelItem => item.SportId)
-                                    </td>
-                                    <td id="homeCell">
-                                        @Html.DisplayFor(modelItem => item.Home.Name)
-                                    </td>
-                                    <td id="awayCell">
-                                        @Html.DisplayFor(modelItem => item.Away.Name)
-                                    </td>
-                                    <td id="startCell">
-                                        @Html.DisplayFor(modelItem => item.Start)
-                                    </td>
-                                    <td id="endCell">
-                                        @Html.DisplayFor(modelItem => item.End)
-                                    </td>
-                                    <td id="tip1">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1) name=@name id="1" />
-                                    </td>
-                                    <td id="tip2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip2) name=@name id="2" />
-                                    </td>
-                                    <td id="tipX">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX) name=@name id="X" />
-                                    </td>
-                                    <td id="tip1X">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1X) name=@name id="1X" />
-                                    </td>
-                                    <td id="tipX2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX2) name=@name id="X2" />
-                                    </td>
-                                    <td id="tip12">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip12) name=@name id="12" />
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                            Košarka
-                        </button>
-                    </h5>
-                </div>
-
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SportId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Home)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Away)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.End)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1X)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip12)
-                                </th>
-                            </tr>
-
-                            @foreach (var item in Model.Where(s => s.SportId == 2 && s.IsTopEvent == false))
-                            {
-                                var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
-                                <tr scope="row" id=@Html.DisplayFor(modelItem => item.Id)>
-                                    <td id="sportIDCell">
-                                        @Html.DisplayFor(modelItem => item.SportId)
-                                    </td>
-                                    <td id="homeCell">
-                                        @Html.DisplayFor(modelItem => item.Home.Name)
-                                    </td>
-                                    <td id="awayCell">
-                                        @Html.DisplayFor(modelItem => item.Away.Name)
-                                    </td>
-                                    <td id="startCell">
-                                        @Html.DisplayFor(modelItem => item.Start)
-                                    </td>
-                                    <td id="endIDCell">
-                                        @Html.DisplayFor(modelItem => item.End)
-                                    </td>
-                                    <td id="tip1">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1) name=@name id="1" />
-                                    </td>
-                                    <td id="tip2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip2) name=@name id="2" />
-                                    </td>
-                                    <td id="tipX">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX) name=@name id="X" />
-                                    </td>
-                                    <td id="tip1X">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1X) name=@name id="1X" />
-                                    </td>
-                                    <td id="tipX2">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX2) name=@name id="X2" />
-                                    </td>
-                                    <td id="tip12">
-                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip12) name=@name id="12" />
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingFour">
-                <h5 class="mb-0">
-                    <button class="btn btn-info" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                        Vaterpolo
-                    </button>
-                </h5>
-            </div>
-
-            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SportId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Home)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Away)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Start)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.End)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tip1)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tip2)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipX)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tip1X)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipX2)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tip12)
-                            </th>
-                        </tr>
-
-                        @foreach (var item in Model.Where(s => s.SportId == 3 && s.IsTopEvent == false))
-                        {
-                            var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
-                            <tr scope="row" id=@Html.DisplayFor(modelItem => item.Id)>
-                                <td id="sportIDCell">
-                                    @Html.DisplayFor(modelItem => item.SportId)
-                                </td>
-                                <td id="homeCell">
-                                    @Html.DisplayFor(modelItem => item.Home.Name)
-                                </td>
-                                <td id="awayCell">
-                                    @Html.DisplayFor(modelItem => item.Away.Name)
-                                </td>
-                                <td id="startCell">
-                                    @Html.DisplayFor(modelItem => item.Start)
-                                </td>
-                                <td id="endIDCell">
-                                    @Html.DisplayFor(modelItem => item.End)
-                                </td>
-                                <td id="tip1">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1) name=@name id="1" />
-                                </td>
-                                <td id="tip2">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip2) name=@name id="2" />
-                                </td>
-                                <td id="tipX">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX) name=@name id="X" />
-                                </td>
-                                <td id="tip1X">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1X) name=@name id="1X" />
-                                </td>
-                                <td id="tipX2">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.TipX2) name=@name id="X2" />
-                                </td>
-                                <td id="tip12">
-                                    <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip12) name=@name id="12" />
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </div>
-        </div>
-        <section id="ticketform">
-            <p>Bet:</p>
-            <input type="text" id="bet" />
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-            <p id="bet-minus-fee"></p>
-            <table id="ticket-data" style="text-align: center; width:400px">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Event</th>
-                        <th>Tip</th>
-                        <th>Coefficient</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <p id="total-coeff"></p>
-            <p id="winnings"></p>
-            <input type="submit" id="submit-ticket" value="Create Ticket" />
-        </section>
-    </section>
-</section>
+</table>

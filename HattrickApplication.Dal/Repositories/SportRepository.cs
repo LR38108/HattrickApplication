@@ -16,6 +16,16 @@ namespace HattrickApplication.Dal
         {
         }
 
+        public Sport UpdateSport(Sport sport)
+        {
+
+            if (sport != null)
+            {
+                HattrickApplicationContext.Entry(sport).State = EntityState.Modified;
+            }
+            return sport;
+        }
+
 
         public HattrickApplicationContext HattrickApplicationContext
         {

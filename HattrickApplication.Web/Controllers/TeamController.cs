@@ -59,7 +59,7 @@ namespace HattrickApplication.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, Balance")] Team team)
+        public ActionResult Create([Bind(Include = "Id, Sport, Name")] Team team)
         {
 
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
@@ -94,7 +94,7 @@ namespace HattrickApplication.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SportID,Home,Away,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopTeam")] Team team)
+        public ActionResult Edit([Bind(Include = "Id, Sport, Name")] Team team)
         {
             if (ModelState.IsValid)
             {

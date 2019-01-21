@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using HattrickApplication.Dal.Repositories;
 using HattrickApplication.Entities;
 
-namespace HattrickApplication.Dal
+namespace HattrickApplication.Dal.Repositories
 {
     public class EventRepository : Repository<Event>, IEventRepository
     {

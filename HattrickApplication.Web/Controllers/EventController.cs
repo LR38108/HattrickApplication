@@ -32,6 +32,11 @@ namespace HattrickApplication.Controllers
             return View(unitOfWork.Events.GetAll());
         }
 
+        public ActionResult LatestEvents()
+        {
+            return View(unitOfWork.Events.GetAll());
+        }
+
         public ActionResult AddToSession(string rowClass, int id, string tip, decimal coefficient)
         {
             List<TicketItem> itemsList = (List<TicketItem>) Session["Ticket"];
@@ -200,19 +205,20 @@ namespace HattrickApplication.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll().OrderBy(s => s.Name), "Id", "Name");
-            ViewBag.HomeId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
-            ViewBag.AwayId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
+            Event anEvent = unitOfWork.Events.Find(e => e.Id == id).FirstOrDefault();
+
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll().OrderBy(s => s.Name), "Id", "Name", anEvent.SportId);
+            ViewBag.HomeId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name", anEvent.Home.Id);
+            ViewBag.AwayId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name", anEvent.Away.Id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = unitOfWork.Events.Find(e => e.Id == id).FirstOrDefault();
-            if (@event == null)
+            if (anEvent == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(anEvent);
         }
 
         // POST: Event/Edit/5

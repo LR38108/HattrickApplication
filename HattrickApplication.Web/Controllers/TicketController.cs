@@ -65,7 +65,7 @@ namespace HattrickApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,SportID,Home,Away,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopTicket")] Ticket ticket)
+        public ActionResult Create([Bind(Include = "Id, User, DateOfSubmission, IsWinning, Bet, TotalOdd, PotentialWinnings, TicketItems")] Ticket ticket)
         {
 
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
@@ -131,7 +131,7 @@ namespace HattrickApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SportID,Home,Away,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopTicket")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "Id, User, DateOfSubmission, IsWinning, Bet, TotalOdd, PotentialWinnings, TicketItems")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
