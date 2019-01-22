@@ -114,6 +114,7 @@ namespace HattrickApplication.Controllers
         // GET: Ticket/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.UserId = new SelectList(unitOfWork.Users.GetAll().OrderBy(u => u.Id), "Id", "Id");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -131,8 +132,9 @@ namespace HattrickApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, User, DateOfSubmission, IsWinning, Bet, TotalOdd, PotentialWinnings, TicketItems")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "Id, UserId, DateOfSubmission, IsWinning, Bet, TotalOdd, PotentialWinnings, TicketItems")] Ticket ticket)
         {
+            ViewBag.UserId = new SelectList(unitOfWork.Users.GetAll().OrderBy(u => u.Id), "Id", "Id");
             if (ModelState.IsValid)
             {
                 unitOfWork.Tickets.UpdateTicket(ticket);

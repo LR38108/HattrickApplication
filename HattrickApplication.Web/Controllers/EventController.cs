@@ -60,10 +60,15 @@ namespace HattrickApplication.Controllers
             
             t.TipType = tip;
             t.TipOdd = coefficient;
-            var test = itemsList.Where(i => i.Event.Id.Equals(id));
-            if (test.Any())
+            var isInList = itemsList.Where(i => i.Event.Id.Equals(id));
+            var hasTopEvents = itemsList.Where(i => i.Event.IsTopEvent);
+            if (isInList.Any() && !t.Event.IsTopEvent)
             {
                 itemsList[itemsList.FindIndex(i => i.Event.Id.Equals(id))] = t;
+                message = "updated";
+            }else if (hasTopEvents.Any() && t.Event.IsTopEvent)
+            {
+                itemsList[itemsList.FindIndex(i => i.Event.IsTopEvent)] = t;
                 message = "updated";
             }
             else
@@ -71,9 +76,10 @@ namespace HattrickApplication.Controllers
                 itemsList.Add(t);
                 message = "added";
             }
+
             Session["Ticket"] = itemsList;
-            //Session["Ticket"] += "<tr><td>"+id+"</td><td>"+e.Home.Name + e.Away.Name +"</td><td>"+ tip + "</td><td>"+coefficient+"</td></tr>";
-            return Json(new {success = true, message=message, val = "<tr class="+ rowclass +"><td>" + id + "</td><td>" + e.Home.Name + e.Away.Name + "</td><td>" + tip + "</td><td>" + coefficient + "</td></tr>" });
+
+            return Json(new { success = true, message = message, val = "<tr class=" + rowclass + "><td>" + id + "</td><td>" + e.Home.Name + e.Away.Name + "</td><td>" + tip + "</td><td>" + coefficient + "</td></tr>" });
         }
         public ActionResult DeleteSession(int eventId)
         {

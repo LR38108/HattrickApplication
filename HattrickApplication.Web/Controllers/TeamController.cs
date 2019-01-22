@@ -77,6 +77,7 @@ namespace HattrickApplication.Web.Controllers
         // GET: Team/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -96,6 +97,7 @@ namespace HattrickApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id, Sport, Name")] Team team)
         {
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
             if (ModelState.IsValid)
             {
                 unitOfWork.Teams.UpdateTeam(team);

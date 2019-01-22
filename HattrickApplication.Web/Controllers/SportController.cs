@@ -92,7 +92,7 @@ namespace HattrickApplication.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name")] Sport sport)
+        public ActionResult Edit([Bind(Include = "Id, Name")] Sport sport)
         {
             if (ModelState.IsValid)
             {

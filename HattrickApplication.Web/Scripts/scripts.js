@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
     var total;
     var cachedItems;
-    if (typeof $("#sesionDiv").attr("value") !== typeof undefined) {
+    if ($("#sesionDiv").val()) {
         cachedItems = $("#sesionDiv").attr("value");
         $("#ticket-data").children('tbody').append(cachedItems);
+        $(".ticketitem").each(function() {
+            var eventId = $(this).find("td:eq(0)").text();
+            var tip = $(this).find("td:eq(2)").text();
+            var row = $("#accordion").find("tr#" + eventId);
+            row.find("input#" + tip).attr("class", "tip-selected");
+        });
     }
-    $('.tip').click(function () {
+    $('.tip, .tip-selected').click(function () {
         if ($(this).attr("class") === "tip") {
             var group = "input:submit[name='" + $(this).attr("name") + "']";
             var $row = jQuery(this).closest('tr');
@@ -16,8 +22,8 @@
             var columnTip = jQuery(this).attr("id");
             var columnCoeff = jQuery(this).attr("value");
             var table = $('#ticket-data').children('tbody');
-            addToTicket(rowclass,columnId, columnTip, columnCoeff);
             if ($("#ticket-data").find("#" + columnId).length) {
+                addToTicket(rowclass, columnId, columnTip, columnCoeff);
                 var row = $("#ticket-data").find("#" + columnId).closest("tr");
                 row.find("td:eq(0)").text(columnId);
                 row.find("td:eq(1)").text(columnHome + columnAway);
@@ -25,7 +31,8 @@
                 row.find("td:eq(3)").text(columnCoeff);
                 $(group).attr("class", "tip");
                 $(this).attr("class", "tip-selected");
-            }else if (rowclass === "TipsCheckBoxGroupTop" && $("#ticket-data").find("#TipsCheckBoxGroupTop").length){
+            } else if (rowclass === "TipsCheckBoxGroupTop" && $("#ticket-data").find("#TipsCheckBoxGroupTop").length) {
+               addToTicket(rowclass, columnId, columnTip, columnCoeff);
                var toprow = $("#ticket-data").find("#TipsCheckBoxGroupTop").closest("tr");
                toprow.find("td:eq(0)").text(columnId);
                toprow.find("td:eq(1)").text(columnHome + columnAway);
@@ -33,7 +40,8 @@
                toprow.find("td:eq(3)").text(columnCoeff);
                $(group).attr("class", "tip");
                $(this).attr("class", "tip-selected");
-            }else {
+            } else {
+                addToTicket(rowclass, columnId, columnTip, columnCoeff);
                 table.append('<tr class="ticketitem" id=' + rowclass + '><td id="' + columnId + '"> ' + columnId + '</td > <td>' + columnHome +"-"+ columnAway + '</td > <td>' + columnTip + '</td > <td class="coeff">' + columnCoeff + '</td><td><button class="removeEvent" type="button">X</button></td></tr > ');
                 $(group).attr("class", "tip");
                 $(this).attr("class", "tip-selected");
@@ -184,7 +192,7 @@
         }
     });
     $(".datePicker").datetimepicker({
-            dateFormat: "dd/MM/yy",
+            dateFormat: "dd/mm/yy",
             timeFormat: 'HH:mm:ss'
         }
     );
