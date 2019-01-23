@@ -28,7 +28,7 @@ namespace HattrickApplication.Entities
             modelBuilder.Entity<TicketItem>()
             .HasRequired(t => t.Event)
             .WithMany(m => m.TicketItems)
-            .HasForeignKey(k => k.TicketId)
+            .HasForeignKey(k => k.EventId)
             .WillCascadeOnDelete(true);
 
 

@@ -82,11 +82,8 @@ namespace HattrickApplication.Controllers
         [HttpPost]
         public ActionResult CreateTicket(Ticket ticket)
         {
-
-            if (ModelState.IsValid)
-            {
                 User user = unitOfWork.Users.Find(u => u.Id == 1).FirstOrDefault();
-                if (user.Balance > ticket.Bet)
+                if (user.Balance > ticket.Bet && ticket.Bet>10)
                 {
                     user.Balance -= ticket.Bet;
                     ticket.User = user;
@@ -99,16 +96,15 @@ namespace HattrickApplication.Controllers
                     unitOfWork.Complete();
                     return Json(new { success = true, message = "Ticket successfully created" });
                 }
+                else if(ticket.Bet < 10)
+                {
+                    return Json(new { success = false, message = "Invalid ammount" });
+                }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Insufficient funds!");
                     return Json(new { success = false, message = "Insufficient funds!" });
                 }
 
-
-            }
-
-            return View();
         }
 
         // GET: Ticket/Edit/5

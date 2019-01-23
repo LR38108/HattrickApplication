@@ -26,7 +26,7 @@
                 addToTicket(rowclass, columnId, columnTip, columnCoeff);
                 var row = $("#ticket-data").find("#" + columnId).closest("tr");
                 row.find("td:eq(0)").text(columnId);
-                row.find("td:eq(1)").text(columnHome + columnAway);
+                row.find("td:eq(1)").text(columnHome +"-"+ columnAway);
                 row.find("td:eq(2)").text(columnTip);
                 row.find("td:eq(3)").text(columnCoeff);
                 $(group).attr("class", "tip");
@@ -35,7 +35,7 @@
                addToTicket(rowclass, columnId, columnTip, columnCoeff);
                var toprow = $("#ticket-data").find("#TipsCheckBoxGroupTop").closest("tr");
                toprow.find("td:eq(0)").text(columnId);
-               toprow.find("td:eq(1)").text(columnHome + columnAway);
+               toprow.find("td:eq(1)").text(columnHome +"-"+ columnAway);
                toprow.find("td:eq(2)").text(columnTip);
                toprow.find("td:eq(3)").text(columnCoeff);
                $(group).attr("class", "tip");
@@ -136,14 +136,14 @@
             });
             ticket.ticketitems = ticketitems;
             ticket.totalOdd = total;
-            ticket.pWon = ticket.totalOdd * ticket.bet * 0.95;
-            ticket.pWon = ticket.pWon.toFixed(2);
+            ticket.PotentialWinnings = ticket.totalOdd * ticket.bet * 0.95;
+            ticket.PotentialWinnings = ticket.PotentialWinnings.toFixed(2);
 
             $.ajax(
                 {
                     type: 'POST',
                     data: JSON.stringify(ticket),
-                    url: '/Event/CreateTicket',
+                    url: '/Ticket/CreateTicket',
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
@@ -192,8 +192,8 @@
         }
     });
     $(".datePicker").datetimepicker({
-            dateFormat: "dd/mm/yy",
-            timeFormat: 'HH:mm:ss'
+            dateFormat: "dd/MM/yy",
+            timeFormat: "HH:mm:ss"
         }
     );
 });

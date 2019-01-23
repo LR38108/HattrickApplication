@@ -13,13 +13,16 @@
     
 <div class="form-horizontal">
     <h4>Event</h4>
+    @Html.ValidationMessage("InvalidTeams", new { @class = "text-danger" })
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
         <label class="control-label col-md-2">Sport</label>
         <div class="col-md-10">
             @Html.DropDownList("SportId")
             @Html.ValidationMessageFor(model => model.SportId, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("InvalidSport", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -42,8 +45,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Start, 
-                new { @Value = Model.Start.ToString("dd/MMMM/yyyy H:mm:ss"), @class="form-control" })
+            @Html.TextBoxFor(m => m.Start,
+                new { @Value = Model.Start.ToString("dd/MMMM/yyyy H:mm:ss"), @class= "form-control datePicker" })
             @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -52,8 +55,9 @@
         @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.End,
-                new { @Value = Model.End.ToString("dd/MMMM/yyyy H:mm:ss"), @class="form-control" })
+                new { @Value = Model.End.ToString("dd/MMMM/yyyy H:mm:ss"), @class= "form-control datePicker" })
             @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("InvalidDate", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -70,6 +74,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tip1, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Tip1, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Tip1LessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -78,6 +83,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tip2, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Tip2, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Tip2LessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -86,6 +92,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.TipX, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TipX, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("TipXLessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -94,6 +101,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tip1X, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Tip1X, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Tip1XLessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -102,6 +110,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.TipX2, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TipX2, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("TipX2LessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -110,6 +119,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tip12, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Tip12, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Tip12LessThanOne", new { @class = "text-danger" })
         </div>
     </div>
 

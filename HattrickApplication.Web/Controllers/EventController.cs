@@ -1,14 +1,10 @@
-﻿using System;
+﻿using HattrickApplication.Dal;
+using HattrickApplication.Entities;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using HattrickApplication.Dal;
-using HattrickApplication.Entities;
 
 namespace HattrickApplication.Controllers
 {
@@ -79,7 +75,7 @@ namespace HattrickApplication.Controllers
 
             Session["Ticket"] = itemsList;
 
-            return Json(new { success = true, message = message, val = "<tr class=" + rowclass + "><td>" + id + "</td><td>" + e.Home.Name + e.Away.Name + "</td><td>" + tip + "</td><td>" + coefficient + "</td></tr>" });
+            return Json(new { success = true });
         }
         public ActionResult DeleteSession(int eventId)
         {
@@ -94,33 +90,6 @@ namespace HattrickApplication.Controllers
                 }
             }
             return Json(new { success = true});
-        }
-
-        [HttpGet]
-        public ActionResult AddEvent(string rowClass, int Id, string tip, decimal coefficient)
-        {
-            List<TicketItem> itemsList = new List<TicketItem>();
-            var ticketitem = new TicketItem();
-            if (Session["Titems"] == null)
-            {
-                Session["Titems"] = new List<TicketItem>();
-                ticketitem.Event = unitOfWork.Events.GetById(Id);
-                ticketitem.TipType = tip;
-                ticketitem.TipOdd = coefficient;
-                itemsList.Add(ticketitem);
-                Session["Titems"] = ticketitem;
-            }
-            else
-            {
-                ticketitem.Event = unitOfWork.Events.GetById(Id);
-                ticketitem.TipType = tip;
-                ticketitem.TipOdd = coefficient;
-                itemsList.Add(ticketitem);
-                Session["Titems"] = ticketitem;
-            }
-
-            //return Json(new { success = true, message = "<tr class=\"ticketitem\" id=" + rowClass + "><td id=" + Id + ">" + Id + "</td ><td>" + ticketitem.Event.Home.Name + ticketitem.Event.Away.Name + "</td > <td>" + tip + "</td > <td class=\"coeff\">" + coefficient + "</td><td><button class=\"removeEvent\" type=\"button\">X</button></td></tr >" });
-            return View();
         }
 
 
@@ -153,59 +122,20 @@ namespace HattrickApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,SportId,HomeId,AwayId,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopEvent")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,SportId,HomeId,AwayId,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopEvent")] Event anEvent)
         {
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll().OrderBy(s => s.Name), "Id", "Name");
             ViewBag.HomeId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
             ViewBag.AwayId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
+            anEvent = EventValidations(anEvent);
             if (ModelState.IsValid)
             {
-                unitOfWork.Events.Add(@event);
+                unitOfWork.Events.Add(anEvent);
                 unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
-        }
-
-        [HttpPost]
-        public ActionResult CreateTicket(Ticket ticket)
-        {           
-
-            if (ModelState.IsValid)
-            {
-                User user = unitOfWork.Users.Find(u => u.Id==1).FirstOrDefault();
-                if (ticket.Bet > 10)
-                {
-                    if (user.Balance > ticket.Bet)
-                    {
-                        user.Balance -= ticket.Bet;
-                        ticket.User = user;
-                        foreach (var ti in ticket.TicketItems)
-                        {
-                            ti.Event = unitOfWork.Events.Find(e => e.Id == ti.Event.Id).FirstOrDefault();
-                        }
-
-                        ticket.DateOfSubmission = DateTime.Now;
-                        unitOfWork.Tickets.Add(ticket);
-                        unitOfWork.Complete();
-                        return Json(new {success = true, message = "Ticket successfully created"});
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Insufficient funds!");
-                        return Json(new {success = false, message = "Insufficient funds!"});
-                    }
-                }
-                else
-                {
-                    return Json((new { success = false, message = "Invalid ammount" }));
-                }
-            }
-            else
-            {
-                return Json((new { success = false, message = "Error" }));
-            }
+            return View(anEvent);
         }
 
         // GET: Event/Edit/5
@@ -220,10 +150,6 @@ namespace HattrickApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (anEvent == null)
-            {
-                return HttpNotFound();
-            }
             return View(anEvent);
         }
 
@@ -232,11 +158,12 @@ namespace HattrickApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SportId,HomeId,AwayId,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopEvent")] Event anEvent)
+        public ActionResult Edit([Bind(Include = "Id,SportId,HomeId,Home,AwayId,Away,Start,End,Result,Tip1,Tip2,TipX,Tip1X,TipX2,Tip12,IsTopEvent")] Event anEvent)
         {
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll().OrderBy(s => s.Name), "Id", "Name");
             ViewBag.HomeId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
             ViewBag.AwayId = new SelectList(unitOfWork.Teams.GetAll().OrderBy(s => s.Name), "Id", "Name");
+            anEvent = EventValidations(anEvent);
             if (ModelState.IsValid)
             {
                 unitOfWork.Events.UpdateEvent(anEvent);
@@ -279,6 +206,50 @@ namespace HattrickApplication.Controllers
                 unitOfWork.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public Event EventValidations(Event eventEntity)
+        {
+            eventEntity.Home = unitOfWork.Teams.GetById(eventEntity.HomeId);
+            eventEntity.Away = unitOfWork.Teams.GetById(eventEntity.AwayId);
+            if (eventEntity.Home.SportId != eventEntity.Away.SportId || eventEntity.HomeId == eventEntity.AwayId)
+            {
+                ModelState.AddModelError("InvalidTeams", "You cannot select same teams or teams from diferent sports!");
+            }
+            if (eventEntity.Home.SportId != eventEntity.SportId || eventEntity.Away.SportId != eventEntity.SportId)
+            {
+                ModelState.AddModelError("InvalidSport", "Invalid Sport!");
+            }
+            if (eventEntity.Start > eventEntity.End)
+            {
+                ModelState.AddModelError("Date", "Event cannot end before it starts!");
+            }
+            if (eventEntity.Tip1 < 1)
+            {
+                ModelState.AddModelError("Tip1LessThanOne", "Tip1 cannot be less than 1!");
+            }
+            else if (eventEntity.Tip2 < 1)
+            {
+                ModelState.AddModelError("Tip2LessThanOne", "Tip2 cannot be less than 1!");
+            }
+            else if (eventEntity.TipX < 1)
+            {
+                ModelState.AddModelError("TipXLessThanOne", "TipX cannot be less than 1!");
+            }
+            else if (eventEntity.Tip1X < 1)
+            {
+                ModelState.AddModelError("Tip1XLessThanOne", "Tip1X cannot be less than 1!");
+            }
+            else if (eventEntity.TipX2 < 1)
+            {
+                ModelState.AddModelError("TipX2LessThanOne", "TipX2 cannot be less than 1!");
+            }
+            else if (eventEntity.Tip12 < 1)
+            {
+                ModelState.AddModelError("Tip12LessThanOne", "Tip12 cannot be less than 1!");
+            }
+
+            return eventEntity;
         }
     }
 }

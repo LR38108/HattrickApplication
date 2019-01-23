@@ -421,7 +421,7 @@
             <div class="card">
                 <div class="card-header" id="headingFour">
                     <h5 class="mb-0">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                             Tenis
                         </button>
                     </h5>
@@ -490,7 +490,7 @@
         <section id="ticketform">
             <p>Bet:</p>
             <input type="text" id="bet" />
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.ValidationMessage( "InsufficientFunds", new { @class = "text-danger" })
             <p id="bet-minus-fee"></p>
             <table id="ticket-data" style="text-align: center; width:400px">
                 <thead>
