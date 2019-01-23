@@ -418,7 +418,75 @@
                     </div>
                 </div>
             </div>
-         </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                            Tenis
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseFive" class="collapse in" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SportId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Home)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Away)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Start)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.End)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip2)
+                                    </th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.Where(s => s.SportId == 4 && s.IsTopEvent == false))
+                            {
+                                var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
+                                <tr scope="row" id=@Html.DisplayFor(modelItem => item.Id)>
+                                    <td id="sportIDCell">
+                                        @Html.DisplayFor(modelItem => item.SportId)
+                                    </td>
+                                    <td id="homeCell">
+                                        @Html.DisplayFor(modelItem => item.Home.Name)
+                                    </td>
+                                    <td id="awayCell">
+                                        @Html.DisplayFor(modelItem => item.Away.Name)
+                                    </td>
+                                    <td id="startCell">
+                                        @Html.DisplayFor(modelItem => item.Start)
+                                    </td>
+                                    <td id="endIDCell">
+                                        @Html.DisplayFor(modelItem => item.End)
+                                    </td>
+                                    <td id="tip1">
+                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip1) name=@name id="1" />
+                                    </td>
+                                    <td id="tip2">
+                                        <input type="submit" class="tip" value=@Html.DisplayFor(modelItem => item.Tip2) name=@name id="2" />
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section id="ticketform">
             <p>Bet:</p>
             <input type="text" id="bet" />

@@ -17,17 +17,17 @@ namespace HattrickApplication.Entities
             new User{Id=1, FirstName="Luka", LastName="Radan", Balance=1443.2m },
             };
             users.ForEach(u => context.Users.Add(u));
-            context.SaveChanges();
+         
 
             var sports = new List<Sport>
             {
             new Sport{Name="Nogomet"},
             new Sport{Name="Košarka"},
-            new Sport{Name="Vaterpolo"}
+            new Sport{Name="Vaterpolo"},
+            new Sport{Name="Tenis"}
 
             };
             sports.ForEach(s => context.Sports.Add(s));
-            context.SaveChanges();
 
             var teams = new List<Team>
             {
@@ -43,10 +43,10 @@ namespace HattrickApplication.Entities
             new Team{Sport = context.Sports.FirstOrDefault(s => s.Id == 2), Name="Zadar"},
             new Team{Sport = context.Sports.FirstOrDefault(s => s.Id == 3), Name="Jadran"},
             new Team{Sport = context.Sports.FirstOrDefault(s => s.Id == 3), Name="Mladost"},
+            new Team{Sport = context.Sports.FirstOrDefault(s => s.Id == 4), Name="R.Nadal"},
+            new Team{Sport = context.Sports.FirstOrDefault(s => s.Id == 4), Name="R.Federer"},
             };
             teams.ForEach(t => context.Teams.Add(t));
-            context.SaveChanges();
-
 
             var events = new List<Event>
             {
@@ -61,12 +61,12 @@ namespace HattrickApplication.Entities
             new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 2), HomeId = 9,  AwayId= 8, Start=DateTime.Parse("2019-01-08 13:30:00"), End=DateTime.Parse("08.01.2019 15:30:00"), Result="", Tip1=1.15m , Tip2=2.3m, TipX=1.32m, Tip1X=1.10m, TipX2=1.9m, Tip12=1.12m, IsTopEvent=false},
             new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 3), HomeId = 11, AwayId= 12, Start=DateTime.Parse("2019-01-07 13:30:00"), End=DateTime.Parse("07.01.2019 15:30:00"), Result="", Tip1=1.15m , Tip2=2.3m, TipX=1.32m, Tip1X=1.10m, TipX2=1.9m, Tip12=1.12m, IsTopEvent=false},
             new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 1), HomeId = 3,  AwayId= 4, Start=DateTime.Parse("2019-01-05 13:30:00"), End=DateTime.Parse("05.01.2019 15:30:00"), Result="", Tip1=1.05m , Tip2=2.3m, TipX=1.32m, Tip1X=1.10m, TipX2=1.9m, Tip12=1.12m, IsTopEvent=false},
-            new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 1), HomeId = 4,  AwayId= 1, Start=DateTime.Parse("2019-01-09 13:30:00"), End=DateTime.Parse("09.01.2019 15:30:00"), Result="", Tip1=1.15m , Tip2=2.3m, TipX=1.32m, Tip1X=1.10m, TipX2=1.9m, Tip12=1.12m, IsTopEvent=false}
+            new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 1), HomeId = 4,  AwayId= 1, Start=DateTime.Parse("2019-01-09 13:30:00"), End=DateTime.Parse("09.01.2019 15:30:00"), Result="", Tip1=1.15m , Tip2=2.3m, TipX=1.32m, Tip1X=1.10m, TipX2=1.9m, Tip12=1.12m, IsTopEvent=false},
+            new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 4), HomeId = 13,  AwayId= 14, Start=DateTime.Parse("2019-01-28 13:30:00"), End=DateTime.Parse("28.01.2019 17:30:00"), Result="", Tip1=1.15m , Tip2=2.3m},
+            new Event{Sport = context.Sports.FirstOrDefault(s => s.Id == 4), HomeId = 14,  AwayId= 13, Start=DateTime.Parse("2019-01-09 13:30:00"), End=DateTime.Parse("09.01.2019 17:30:00"), Result="", Tip1=1.15m , Tip2=2.3m}
             };                           
 
-            events.ForEach(e => context.Events.Add(e));
-            context.SaveChanges();            
-           
+            events.ForEach(e => context.Events.Add(e));           
 
             var tickets = new List<Ticket>
             {
@@ -82,7 +82,6 @@ namespace HattrickApplication.Entities
 
             };
             tickets.ForEach(t => context.Tickets.Add(t));
-            context.SaveChanges();
 
             var ticketItems = new List<TicketItem>
             {
@@ -110,8 +109,9 @@ namespace HattrickApplication.Entities
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 9), Event=context.Events.FirstOrDefault(e => e.Id == 6), TipType="12", TipOdd=1.12m},
             };
             ticketItems.ForEach(t => context.TicketItems.Add(t));
-            context.SaveChanges();
-            
+
+
+            context.SaveChanges();           
         
         }
     }

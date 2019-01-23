@@ -17,10 +17,10 @@ namespace HattrickApplication.Entities
         public string Result { get; set; }
         public decimal Tip1 { get; set; }
         public decimal Tip2 { get; set; }
-        public decimal TipX { get; set; }
-        public decimal Tip1X { get; set; }
-        public decimal TipX2 { get; set; }
-        public decimal Tip12 { get; set; }
+        public decimal? TipX { get; set; }
+        public decimal? Tip1X { get; set; }
+        public decimal? TipX2 { get; set; }
+        public decimal? Tip12 { get; set; }
         public bool IsTopEvent { get; set; }
 
         public virtual Sport Sport { get; set; }
