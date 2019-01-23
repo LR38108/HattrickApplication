@@ -14,6 +14,7 @@ namespace HattrickApplication.Dal
         IUserRepository Users { get; }
         ISportRepository Sports { get; }
         ITeamRepository Teams { get; }
+        ITicketItemRepository TicketItems { get; }
         int Complete();
     }
 }

@@ -154,42 +154,43 @@
                 <div id="collapseTwo" class="collapse in" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SportId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Home)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Away)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.End)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1X)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip12)
-                                </th>
-                            </tr>
-
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SportId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Home)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Away)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Start)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.End)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1X)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip12)
+                                    </th>
+                                </tr>
+                            </thead>
                             @foreach (var item in Model.Where(s => s.SportId == 1 && s.IsTopEvent == false))
                             {
                                 var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
@@ -245,42 +246,43 @@
                 <div id="collapseThree" class="collapse in" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SportId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Home)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Away)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.End)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1X)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip12)
-                                </th>
-                            </tr>
-
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SportId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Home)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Away)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Start)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.End)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1X)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip12)
+                                    </th>
+                                </tr>
+                            </thead>
                             @foreach (var item in Model.Where(s => s.SportId == 2 && s.IsTopEvent == false))
                             {
                                 var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);
@@ -336,42 +338,43 @@
                 <div id="collapseFour" class="collapse in" aria-labelledby="headingFour" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SportId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Home)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Away)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.End)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip1X)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipX2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Tip12)
-                                </th>
-                            </tr>
-
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SportId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Home)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Away)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Start)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.End)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip1X)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipX2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tip12)
+                                    </th>
+                                </tr>
+                            </thead>
                             @foreach (var item in Model.Where(s => s.SportId == 3 && s.IsTopEvent == false))
                             {
                                 var name = "TipsCheckBoxGroup" + @Html.DisplayFor(modelItem => item.Id);

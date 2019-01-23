@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HattrickApplication.Entities
@@ -25,5 +26,6 @@ namespace HattrickApplication.Entities
         public virtual Sport Sport { get; set; }
         public virtual Team Home { get; set; }
         public virtual Team Away { get; set; }
+        public virtual ICollection<TicketItem> TicketItems { get; set; }
     }
 }

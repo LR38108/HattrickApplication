@@ -82,8 +82,8 @@
     $('#ticket-data').on("click", ".removeEvent", function () {
         var row = jQuery(this).closest("tr");
         var id = row.find("td:eq(0)").text().replace(" ", "");
-        var acordionRow = $("#content").find('#'+id);
-        var nov = acordionRow.find("input.tip-selected");
+        var acordionRow = $("#content").find('tr#'+id);
+        var nov = acordionRow.find("input:submit.tip-selected");
         nov.attr("class", "tip");
         deleteFromTicket(id);
         jQuery(this).closest("tr").remove();

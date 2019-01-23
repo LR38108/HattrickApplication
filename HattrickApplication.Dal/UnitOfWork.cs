@@ -20,6 +20,7 @@ namespace HattrickApplication.Dal
             Users = new UserRepository(_context);
             Sports = new SportRepository(_context);
             Teams = new TeamRepository(_context);
+            TicketItems = new TicketItemRepository(_context);
         }
 
         public IEventRepository Events { get; private set; }
@@ -27,6 +28,7 @@ namespace HattrickApplication.Dal
         public IUserRepository Users { get; private set; }
         public ISportRepository Sports { get; private set; }
         public ITeamRepository Teams { get; private set; }
+        public ITicketItemRepository TicketItems { get; private set; }
 
         public int Complete()
         {

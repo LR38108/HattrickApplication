@@ -87,7 +87,6 @@ namespace HattrickApplication.Entities
             var ticketItems = new List<TicketItem>
             {
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 1), Event=context.Events.FirstOrDefault(e => e.Id == 1), TipType="1", TipOdd=1.15m},
-            new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 1), Event=context.Events.FirstOrDefault(e => e.Id == 2), TipType="X", TipOdd=1.32m},
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 1), Event=context.Events.FirstOrDefault(e => e.Id == 3), TipType="2", TipOdd=2.3m},
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 1), Event=context.Events.FirstOrDefault(e => e.Id == 4), TipType="12", TipOdd=1.12m},
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 1), Event=context.Events.FirstOrDefault(e => e.Id == 5), TipType="1X", TipOdd=1.1m},
@@ -110,7 +109,7 @@ namespace HattrickApplication.Entities
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 9), Event=context.Events.FirstOrDefault(e => e.Id == 5), TipType="1X", TipOdd=1.1m},
             new TicketItem{Ticket=context.Tickets.FirstOrDefault(t => t.Id == 9), Event=context.Events.FirstOrDefault(e => e.Id == 6), TipType="12", TipOdd=1.12m},
             };
-            ticketItems.ForEach(t => context.TiceketItems.Add(t));
+            ticketItems.ForEach(t => context.TicketItems.Add(t));
             context.SaveChanges();
             
         

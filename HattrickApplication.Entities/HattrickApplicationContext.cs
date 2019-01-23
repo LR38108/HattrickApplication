@@ -15,11 +15,33 @@ namespace HattrickApplication.Entities
         public DbSet<Team> Teams { get; set; }
         public DbSet<Event> Events { get; set; }         
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<TicketItem> TiceketItems { get; set; }
+        public DbSet<TicketItem> TicketItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<TicketItem>()
+            .HasRequired(t => t.Ticket)
+            .WithMany(m => m.TicketItems)
+            .HasForeignKey(k => k.TicketId)
+            .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<TicketItem>()
+            .HasRequired(t => t.Event)
+            .WithMany(m => m.TicketItems)
+            .HasForeignKey(k => k.TicketId)
+            .WillCascadeOnDelete(true);
+
+
+            modelBuilder.Entity<Event>()
+            .HasRequired(e => e.Home)
+            .WithMany()
+            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Event>()
+            .HasRequired(e => e.Away)
+            .WithMany()
+            .WillCascadeOnDelete(false);
+
         }
 
     }
