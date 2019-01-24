@@ -94,7 +94,9 @@ namespace HattrickApplication.Controllers
                     ticket.DateOfSubmission = DateTime.Now;
                     unitOfWork.Tickets.Add(ticket);
                     unitOfWork.Complete();
+                    Session["Ticket"] = null;
                     return Json(new { success = true, message = "Ticket successfully created" });
+                    
                 }
                 else if(ticket.Bet < 10)
                 {
@@ -166,13 +168,5 @@ namespace HattrickApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                unitOfWork.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
