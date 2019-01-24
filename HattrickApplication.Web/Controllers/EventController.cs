@@ -30,6 +30,23 @@ namespace HattrickApplication.Controllers
 
         public ActionResult LatestEvents()
         {
+
+            if (Session["Ticket"] != null)
+            {
+                foreach (TicketItem t in (List<TicketItem>)Session["Ticket"])
+                {
+                    if (t.Event.IsTopEvent)
+                    {
+                        TempData["Ticket"] += "<tr class='ticketitem' id='TipsCheckBoxGroupTop'><td id ='" + t.Event.Id + "'>" + t.Event.Id + "</td><td>" + t.Event.Home.Name + "-" + t.Event.Away.Name + " </td ><td>" + t.TipType + " </td ><td class='coeff'>" + t.TipOdd + "</td><td><button class='removeEvent' type='button'>X</button></td></tr>";
+                    }
+                    else
+                    {
+                        TempData["Ticket"] += "<tr class='ticketitem' id='TipsCheckBoxGroup" + t.Event.Id +"'><td id ='" + t.Event.Id + "'>" + t.Event.Id + "</td><td>" +t.Event.Home.Name + "-" + t.Event.Away.Name + " </td ><td>" +t.TipType +" </td ><td class='coeff'>" + t.TipOdd + "</td><td><button class='removeEvent' type='button'>X</button></td></tr>";
+                        
+                    }
+                }
+            }
+        
             return View(unitOfWork.Events.GetAll());
         }
 

@@ -3,27 +3,13 @@
 
 @{
     ViewBag.Title = "Index";
+    var cached = TempData["Ticket"] as string;
 }
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
 <h2>Najnovije utakmice</h2>
-<input id="sesionDiv" type="hidden" value="@{
-                                               if (Session["Ticket"] != null)
-                                               {
-                                                   foreach (TicketItem t in(List<TicketItem>) Session["Ticket"])
-                                                   {
-                                                       if (t.Event.IsTopEvent)
-                                                       {
-                                                           <tr class='ticketitem' id='TipsCheckBoxGroupTop'><td id=@t.Event.Id>@t.Event.Id</td><td>@t.Event.Home.Name - @t.Event.Away.Name</td><td>@t.TipType</td><td class='coeff'>@t.TipOdd</td><td><button class='removeEvent' type='button'>X</button></td></tr>
-                                                       }
-                                                       else
-                                                       {
-                                                           <tr class='ticketitem' id='TipsCheckBoxGroup@(t.EventId)'><td id=@t.EventId>@t.Event.Id</td><td>@t.Event.Home.Name - @t.Event.Away.Name</td><td>@t.TipType</td><td class='coeff'>@t.TipOdd</td><td><button class='removeEvent' type='button'>X</button></td></tr>
-                                                       }
-                                                   }
-                                               }
-                                           }"/>
+<input id="sesionDiv" type="hidden" value="@cached"/>
 <style>
     footer {
         display: none;
