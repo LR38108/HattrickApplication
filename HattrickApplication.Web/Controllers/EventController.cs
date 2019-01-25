@@ -24,7 +24,7 @@ namespace HattrickApplication.Controllers
 
         // GET: Event
         public ActionResult Index()
-        {   
+        {
             return View(unitOfWork.Events.GetAll());
         }
 
@@ -41,18 +41,18 @@ namespace HattrickApplication.Controllers
                     }
                     else
                     {
-                        TempData["Ticket"] += "<tr class='ticketitem' id='TipsCheckBoxGroup" + t.Event.Id +"'><td id ='" + t.Event.Id + "'>" + t.Event.Id + "</td><td>" +t.Event.Home.Name + "-" + t.Event.Away.Name + " </td ><td>" +t.TipType +" </td ><td class='coeff'>" + t.TipOdd + "</td><td><button class='removeEvent' type='button'>X</button></td></tr>";
-                        
+                        TempData["Ticket"] += "<tr class='ticketitem' id='TipsCheckBoxGroup" + t.Event.Id + "'><td id ='" + t.Event.Id + "'>" + t.Event.Id + "</td><td>" + t.Event.Home.Name + "-" + t.Event.Away.Name + " </td ><td>" + t.TipType + " </td ><td class='coeff'>" + t.TipOdd + "</td><td><button class='removeEvent' type='button'>X</button></td></tr>";
+
                     }
                 }
             }
-        
+
             return View(unitOfWork.Events.GetAll());
         }
 
         public ActionResult AddToSession(string rowClass, int id, string tip, decimal coefficient)
         {
-            List<TicketItem> itemsList = (List<TicketItem>) Session["Ticket"];
+            List<TicketItem> itemsList = (List<TicketItem>)Session["Ticket"];
             if (itemsList == null)
             {
                 itemsList = new List<TicketItem>();
@@ -70,7 +70,7 @@ namespace HattrickApplication.Controllers
             {
                 rowclass = "TipsCheckBoxGroup" + t.Event.Id;
             }
-            
+
             t.TipType = tip;
             t.TipOdd = coefficient;
             var isInList = itemsList.Where(i => i.Event.Id.Equals(id));
@@ -79,7 +79,8 @@ namespace HattrickApplication.Controllers
             {
                 itemsList[itemsList.FindIndex(i => i.Event.Id.Equals(id))] = t;
                 message = "updated";
-            }else if (hasTopEvents.Any() && t.Event.IsTopEvent)
+            }
+            else if (hasTopEvents.Any() && t.Event.IsTopEvent)
             {
                 itemsList[itemsList.FindIndex(i => i.Event.IsTopEvent)] = t;
                 message = "updated";
@@ -106,7 +107,7 @@ namespace HattrickApplication.Controllers
                     break;
                 }
             }
-            return Json(new { success = true});
+            return Json(new { success = true });
         }
 
 

@@ -51,6 +51,7 @@ namespace HattrickApplication.Web.Controllers
         // GET: Team/Create
         public ActionResult Create()
         {
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -59,7 +60,7 @@ namespace HattrickApplication.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Sport, Name")] Team team)
+        public ActionResult Create([Bind(Include = "Id, Sport, SportId, Name")] Team team)
         {
 
             ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
@@ -77,12 +78,12 @@ namespace HattrickApplication.Web.Controllers
         // GET: Team/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
+            Team team = unitOfWork.Teams.Find(t => t.Id == id).FirstOrDefault();
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name", team.SportId);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = unitOfWork.Teams.Find(e => e.Id == id).FirstOrDefault();
             if (team == null)
             {
                 return HttpNotFound();
@@ -95,9 +96,9 @@ namespace HattrickApplication.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Sport, Name")] Team team)
+        public ActionResult Edit([Bind(Include = "Id, Sport, SportId, Name")] Team team)
         {
-            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name");
+            ViewBag.SportId = new SelectList(unitOfWork.Sports.GetAll(), "Id", "Name", team.SportId);
             if (ModelState.IsValid)
             {
                 unitOfWork.Teams.UpdateTeam(team);

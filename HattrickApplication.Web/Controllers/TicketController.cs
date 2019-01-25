@@ -82,30 +82,30 @@ namespace HattrickApplication.Controllers
         [HttpPost]
         public ActionResult CreateTicket(Ticket ticket)
         {
-                User user = unitOfWork.Users.Find(u => u.Id == 1).FirstOrDefault();
-                if (user.Balance > ticket.Bet && ticket.Bet>10)
+            User user = unitOfWork.Users.Find(u => u.Id == 1).FirstOrDefault();
+            if (user.Balance > ticket.Bet && ticket.Bet > 10)
+            {
+                user.Balance -= ticket.Bet;
+                ticket.User = user;
+                foreach (var ti in ticket.TicketItems)
                 {
-                    user.Balance -= ticket.Bet;
-                    ticket.User = user;
-                    foreach (var ti in ticket.TicketItems)
-                    {
-                        ti.Event = unitOfWork.Events.Find(e => e.Id == ti.Event.Id).FirstOrDefault();
-                    }
-                    ticket.DateOfSubmission = DateTime.Now;
-                    unitOfWork.Tickets.Add(ticket);
-                    unitOfWork.Complete();
-                    Session["Ticket"] = null;
-                    return Json(new { success = true, message = "Ticket successfully created" });
-                    
+                    ti.Event = unitOfWork.Events.Find(e => e.Id == ti.Event.Id).FirstOrDefault();
                 }
-                else if(ticket.Bet < 10)
-                {
-                    return Json(new { success = false, message = "Invalid ammount" });
-                }
-                else
-                {
-                    return Json(new { success = false, message = "Insufficient funds!" });
-                }
+                ticket.DateOfSubmission = DateTime.Now;
+                unitOfWork.Tickets.Add(ticket);
+                unitOfWork.Complete();
+                Session["Ticket"] = null;
+                return Json(new { success = true, message = "Ticket successfully created" });
+
+            }
+            else if (ticket.Bet < 10)
+            {
+                return Json(new { success = false, message = "Invalid ammount" });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Insufficient funds!" });
+            }
 
         }
 
