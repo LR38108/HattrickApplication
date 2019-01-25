@@ -9,6 +9,7 @@ namespace HattrickApplication.Entities
 
         public HattrickApplicationContext() : base("HattrickApplicationContext")
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<HattrickApplicationContext>());
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Sport> Sports { get; set; }

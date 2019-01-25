@@ -231,7 +231,7 @@ namespace HattrickApplication.Controllers
             }
             if (eventEntity.Start > eventEntity.End)
             {
-                ModelState.AddModelError("Date", "Event cannot end before it starts!");
+                ModelState.AddModelError("InvalidDate", "Event cannot end before it starts!");
             }
             if (eventEntity.Tip1 < 1)
             {
